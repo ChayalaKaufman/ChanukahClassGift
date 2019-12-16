@@ -94,7 +94,7 @@ namespace ClassGift.Data
             client.Port = 587;
             client.EnableSsl = true;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new NetworkCredential("programmer1129@gmail.com", "ckma1lck");
+            client.Credentials = new NetworkCredential("programmer1129@gmail.com", "password");
             client.Timeout = 20000;
             try
             {

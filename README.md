@@ -30,6 +30,8 @@ You can also set the view of the table to your preference, using the buttons: vi
 
 I hope you find everything clear and user-friendly!
 
-https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Data will bring you to the database related code.
+https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Data - brings you to the the database related code.
 
 https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Web/ClientApp/src - the react files
+
+https://github.com/ChayalaKaufman/ChanukahClassGift/blob/master/ClassGift.Web/Controllers/StudentsController.cs - the Controller

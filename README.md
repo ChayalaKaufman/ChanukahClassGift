@@ -36,3 +36,5 @@ https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Data -
 https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Web/ClientApp/src - the react files
 
 https://github.com/ChayalaKaufman/ChanukahClassGift/blob/master/ClassGift.Web/Controllers/StudentsController.cs - the Controller
+
+**if you download this, and run it on your computer, the automatic email probably won't work being that I removed my email password.

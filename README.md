@@ -12,6 +12,7 @@ The students are added to the table by clicking on the 'Add Student' button on t
 On the table, there are additional columns.
 
   -Contribution: displays the contribution amount that the student gave. If the student hasn't yet contributed, it displays a textbox and submit button to add their contribution when they give one.
+  
  The next few columns are only available if the student has not yet contributed.
  
   -Send Automatic Email: send a scripted email asking the parent for a contribution.

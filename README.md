@@ -29,3 +29,5 @@ Above the table there is a display of the total money collected.
 You can also set the view of the table to your preference, using the buttons: view all, view paid, and view unpaid. 
 
 I hope you find everything clear and user-friendly!
+
+https://github.com/ChayalaKaufman/ChanukahClassGift/tree/master/ClassGift.Data will bring you to the database related code.

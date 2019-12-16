@@ -2,10 +2,9 @@
 import { withRouter } from 'react-router-dom';
 import { produce } from 'immer';
 import axios from 'axios';
-import StudentForm from './StudentForm';
-
 
 class AddStudent extends React.Component {
+
     state = {
         student: {
             firstName: '',
@@ -14,19 +13,25 @@ class AddStudent extends React.Component {
             phone: '',
             email: '',
             contributionAmount: ''
-        }
+        },
+        disabled: true
     };
 
     onInputChange = e => {
         const newState = produce(this.state, draft => {
             const { student } = draft;
             student[e.target.name] = e.target.value;
+            if (student.firstName && student.lastName && student.parentName && student.phone) {
+                draft.disabled = false;
+            }
+            else {
+                draft.disabled = true;
+            }
         });
         this.setState(newState);
     }
 
     onSubmit = () => {
-        console.log(this.state.person);
         axios.post('/api/students/addstudent', this.state.student).then(() => {
             const nextState = produce(this.state, draftState => {
                 draftState.student = {
@@ -98,7 +103,7 @@ class AddStudent extends React.Component {
                             className="form-control"
                         />
                         <br />
-                        <button className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
+                        <button id="submit" disabled={this.state.disabled} className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                     </div>
                 </div>
             </div>);

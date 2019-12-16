@@ -31,21 +31,59 @@ namespace ClassGift.Web.Controllers
 
         [HttpPost]
         [Route("addStudent")]
-        public Student AddStudent(Student student)
+        public void AddStudent(Student student)
         {
+            if (student.FirstName == null || student.LastName == null || student.ParentName == null
+                || student.Phone == null)
+            {
+                return;
+            }
             var repo = new StudentsRepository(_connectionString);
             repo.AddStudent(student);
-            return student;
+            return;
         }
 
         [HttpPost]
         [Route("addCollection")]
-        public Collection AddCollection(Collection c)
+        public void AddCollection(Collection c)
         {
             c.Date = DateTime.Now;
             var repo = new StudentsRepository(_connectionString);
             repo.AddCollection(c);
-            return c;
+        }
+
+        [HttpGet]
+        [Route("getCollections")]
+        public CollectionsViewModel GetCollections(int id)
+        {
+            var repo = new StudentsRepository(_connectionString);
+            CollectionsViewModel cvm = new CollectionsViewModel
+            {
+                Student = repo.GetStudentById(id),
+                Collections = new List<CollectionView>()
+            };
+            List<Collection> collections = repo.GetCollectionsForId(id);
+            collections.ForEach(c =>
+            {
+                CollectionView cView = new CollectionView
+                {
+                    Id = c.Id,
+                    Notes = c.Notes,
+                    Student = c.Student,
+                    StudentId = c.StudentId,
+                    Date = c.Date.ToString("dddd, dd MMMM yyyy")
+                };
+                if (c.Type == 0)
+                {
+                    cView.Type = "Call";
+                }
+                else
+                {
+                    cView.Type = "Email";
+                }
+                cvm.Collections.Add(cView);
+            });
+            return cvm;
         }
 
         [HttpPost]
@@ -79,6 +117,35 @@ namespace ClassGift.Web.Controllers
         {
             var repo = new StudentsRepository(_connectionString);
             repo.Update(p);
+        }
+
+        [Route("getTotalContributions")]
+        [HttpGet]
+        public decimal? GetTotalContributions()
+        {
+            var repo = new StudentsRepository(_connectionString);
+            return repo.GetTotalContributions();
+        }
+
+        [Route("sendEmail")]
+        [HttpPost]
+        public string SendEmail(int id)
+        {
+            var repo = new StudentsRepository(_connectionString);
+            Student s = repo.GetStudentById(id);
+            var result = repo.SendEmail(s.Email);
+            if (result == "Mail has been successfully sent!")
+            {
+                Collection c = new Collection
+                {
+                    StudentId = id,
+                    Type = CollectionType.Email,
+                    Date = DateTime.Now,
+                    Notes = "sent scripted email"
+                };
+                repo.AddCollection(c);
+            }
+            return result;
         }
     }
 }

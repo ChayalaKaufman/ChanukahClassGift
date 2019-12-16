@@ -14,15 +14,19 @@ class AddCollection extends React.Component {
             type: '',
             notes: '',
             studentId: ''
-        }
+        },
+        disabled: true
     }
+
     componentDidMount = () => {
         const id = this.props.match.params.id;
         if (id) {
-            debugger
             axios.get(`/api/students/getStudent?id=${id}`).then(({ data }) => {
-                //this.state.students = data;
-                    //this.setState({ collection.studentId = id })
+                const newState = produce(this.state, draft => {
+                    draft.student = data;
+                    draft.collection.studentId = id;
+                });
+                this.setState(newState);
             });
         }
         else {
@@ -31,53 +35,83 @@ class AddCollection extends React.Component {
     }
 
     onInputChange = e => {
-        debugger
         const newState = produce(this.state, draft => {
             const { collection } = draft;
             collection[e.target.name] = e.target.value;
+            if (collection.type) {
+                draft.disabled = false;
+            }
+            else {
+                draft.disabled = true;
+            }
         });
         this.setState(newState);
     }
 
     onAddClick = () => {
-        this.state.collection.studentId = this.props.match.params.id;
-        console.log(this.state.collection);
-        debugger
         axios.post('/api/students/addCollection', this.state.collection).then(() => {
-            //const nextState = produce(this.state, draftState => {
-
-            //});
-            //this.setState(nextState);
+            debugger
+            const nextState = produce(this.state, draftState => {
+                draftState.student = {
+                    firstName: '',
+                    lastName: '',
+                    id: ''
+                };
+                draftState.collection = {
+                    type: '',
+                    notes: '',
+                    studentId: ''
+                };
+            });
+            this.setState(nextState);
             this.props.history.push('/studentstable');
         });
     }
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-4 well">
-                        <h1>Add Collection</h1>
-                        <input type="textarea"
-                            name="notes"
-                            value={this.state.collection.notes}
-                            onChange={this.onInputChange}
-                            placeholder="Notes..."
-                            className="form-control"
-                        />
-                        {/*<input type="text"
-                            name="contributionAmount"
-                            value={this.state.contributionAmount}
-                            onChange={this.onInputChange}
-                            placeholder="Amount"
-                            className="form-control"
-                        >*/}
-                        <input type="radio" name="type" onChange={this.onInputChange} value="email">Email</input>
-                        <input type="radio" name="type" onChange={this.onInputChange} value="call">Call</input>
-                        <button className="btn btn-primary" onClick={this.onAddClick}>Add</button>
+            <form>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-4 well">
+                            <h1>Add Collection for {this.state.student.firstName + " " + this.state.student.lastName}</h1>
+                            <textarea type="text"
+                                name="notes"
+                                value={this.state.collection.notes}
+                                onChange={this.onInputChange}
+                                placeholder="Type notes here..."
+                                className="form-control"
+                            />
+                            <div className="form-check">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="type"
+                                        value="email"
+                                        onChange={this.onInputChange}
+                                        className="form-check-input"
+                                    />
+                                    Email
+                             </label>
+                            </div>
+                            <div className="form-check">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="type"
+                                        value="call"
+                                        onChange={this.onInputChange}
+                                        className="form-check-input" />
+                                    Call
+                                 </label>
+                            </div>
+                            <br />
+                            <button className="btn btn-primary" disabled={this.state.disabled}
+                                onClick={this.onAddClick}>Add</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         )
     }
 }

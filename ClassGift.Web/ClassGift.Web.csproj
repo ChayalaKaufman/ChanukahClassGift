@@ -22,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\AddContribtion.js" />
+    <None Remove="ClientApp\src\AddContribtion.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ClassGift.Data\ClassGift.Data.csproj" />
   </ItemGroup>
 

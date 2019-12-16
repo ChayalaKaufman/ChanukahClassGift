@@ -17,17 +17,29 @@ class StudentRow extends React.Component {
     }
 
     onContributeClick = () => {
-        const add = {
+        const contribution = {
             contributionAmount: this.state.contributionAmount,
             id: this.props.student.id
         }
-        axios.post('/api/students/addContribution', add).then(() => {
-            { window.location.reload(false); }
+        axios.post('/api/students/addContribution', contribution).then(() => {
+            window.location.reload(false);
         });
     }
 
-    onCollectClick = (id) => {
+    onCollectClick = () => {
         this.props.history.push(`/AddCollection/${this.props.student.id}`);
+    }
+
+    onViewCollectionsClick = () => {
+        this.props.history.push(`/ViewCollections/${this.props.student.id}`);
+    }
+
+    onSendEmailClick = () => {
+        const id = this.props.student.id;
+        axios.post(`/api/students/sendEmail?id=${id}`).then(({ data }) => {
+            alert(data);
+            window.location.reload(false);
+        });
     }
 
     render() {
@@ -46,12 +58,13 @@ class StudentRow extends React.Component {
                             placeholder="Amount"
                             className="form-control"
                         />
-                        <button className='btn btn-info' onClick={this.onContributeClick}>Contribute</button>
+                        <button className='btn btn-secondary' onClick={this.onContributeClick}>Contribute</button>
                     </div>
                 }
                 </td>
-                <td>{student.contributionAmount ? ' ' : <button className='btn btn-primary' onClick={this.onCollectClick}>Collect</button>}</td>
-                <td>{student.contributionAmount /*? ' ' : <button className='btn btn-info' onClick={onViewCollectionsClick}>View Collections</button>*/}</td>
+                <td>{student.contributionAmount ? ' ' : <button className='btn btn-secondary' onClick={this.onCollectClick}>Add Collection</button>}</td>
+                <td>{<button className='btn btn-info' onClick={this.onViewCollectionsClick}>View Collections</button>}</td>
+                <td>{student.contributionAmount || !student.email ? ' ' :<button className='btn btn-info' onClick={this.onSendEmailClick}>Send Email</button>}</td>
             </tr>
         )
     }

@@ -50,7 +50,7 @@ class AddCollection extends React.Component {
 
     onAddClick = () => {
         axios.post('/api/students/addCollection', this.state.collection).then(() => {
-            debugger
+            //debugger
             const nextState = produce(this.state, draftState => {
                 draftState.student = {
                     firstName: '',

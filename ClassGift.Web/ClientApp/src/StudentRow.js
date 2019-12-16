@@ -63,8 +63,8 @@ class StudentRow extends React.Component {
                 }
                 </td>
                 <td>{student.contributionAmount ? ' ' : <button className='btn btn-secondary' onClick={this.onCollectClick}>Add Collection</button>}</td>
-                <td>{<button className='btn btn-info' onClick={this.onViewCollectionsClick}>View Collections</button>}</td>
-                <td>{student.contributionAmount || !student.email ? ' ' :<button className='btn btn-info' onClick={this.onSendEmailClick}>Send Email</button>}</td>
+                <td><button className='btn btn-link' onClick={this.onViewCollectionsClick}>View Collections</button></td>
+                <td>{student.contributionAmount || !student.email ? ' ' :<button className='btn btn-link' onClick={this.onSendEmailClick}>Send Email</button>}</td>
             </tr>
         )
     }

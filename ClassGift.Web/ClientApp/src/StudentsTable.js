@@ -15,6 +15,7 @@ class StudentsTable extends React.Component {
     }
     componentDidMount = () => {
         axios.get('api/students/getall').then(({ data }) => {
+            data.forEach(s => s.markedForDeletion = false);
             this.setState({ students: data });
             this.setState({ viewStudents: data });
         });
@@ -25,14 +26,14 @@ class StudentsTable extends React.Component {
 
     toggleView = (view) => {
         const newState = produce(this.state, draft => {
-            draft.disabledPaid = false,
-                draft.disabledUnpaid = false,
-                draft.disabledAll = false
-            if (view == 'paid') {
+            draft.disabledPaid = false;
+            draft.disabledUnpaid = false;
+            draft.disabledAll = false;
+            if (view === 'paid') {
                 draft.viewStudents = this.state.students.filter(s => s.contributionAmount);
                 draft.disabledPaid = true;
             }
-            else if (view == 'unpaid') {
+            else if (view === 'unpaid') {
                 draft.viewStudents = this.state.students.filter(s => !s.contributionAmount);
                 draft.disabledUnpaid = true;
             }
@@ -71,6 +72,7 @@ class StudentsTable extends React.Component {
                             <th>Add Collection</th>
                             <th>View Collections</th>
                             <th>Send Email</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>

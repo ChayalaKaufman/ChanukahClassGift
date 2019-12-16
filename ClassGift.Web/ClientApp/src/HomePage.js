@@ -13,7 +13,7 @@ class HomePage extends React.Component {
                 list.
                 In the class list, there will be a column with each child's contribution (or
                 a spot to insert one if they haven't yet), and a place to record all of the calls or emails that
-                you were made to each parent. You can also view a list of all calls/emails for a given student
+                were made to each parent. You can also view a list of all calls/emails for a given student
                 on a separate page.
                 Sounds good? Go right ahead and start with entering your child's classmates into the system.
                 Good Luck!!!</p>

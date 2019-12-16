@@ -9,7 +9,8 @@ Below I will explain how the app works.
 
 The main page has a table that displays the whole class list, with the parent and contact information.
 The students are added to the table by clicking on the 'Add Student' button on the top of the page.
-On the table, there are additional columns.
+
+On the table, there are additional columns:
 
   -Contribution: displays the contribution amount that the student gave. If the student hasn't yet contributed, it displays a textbox and submit button to add their contribution when they give one.
   

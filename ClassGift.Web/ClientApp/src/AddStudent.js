@@ -2,6 +2,7 @@
 import { withRouter } from 'react-router-dom';
 import { produce } from 'immer';
 import axios from 'axios';
+import StudentForm from './AddStudentForm';
 
 class AddStudent extends React.Component {
 
@@ -49,64 +50,12 @@ class AddStudent extends React.Component {
     }
 
     render() {
-        const { student } = this.state;
+        const { student, disabled } = this.state;
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-4 well">
-                        <h1>Add Student</h1>
-                        <input type="text"
-                            name="firstName"
-                            value={student.firstName}
-                            onChange={this.onInputChange}
-                            placeholder="First Name"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="lastName"
-                            value={student.lastName}
-                            onChange={this.onInputChange}
-                            placeholder="Last Name"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="parentName"
-                            value={student.parentName}
-                            onChange={this.onInputChange}
-                            placeholder="Parent Name"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="phone"
-                            value={student.phone}
-                            onChange={this.onInputChange}
-                            placeholder="Phone Number"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="email"
-                            value={student.email}
-                            onChange={this.onInputChange}
-                            placeholder="Email"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="contributionAmount"
-                            value={student.contributionAmount}
-                            onChange={this.onInputChange}
-                            placeholder="Contribution Amount"
-                            className="form-control"
-                        />
-                        <br />
-                        <button id="submit" disabled={this.state.disabled} className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
-                    </div>
-                </div>
-            </div>);
+            <StudentForm student={student} onInputChange={this.onInputChange} onSubmit={this.onSubmit}
+                disabled={disabled}
+            />
+            );
     }
 }
 

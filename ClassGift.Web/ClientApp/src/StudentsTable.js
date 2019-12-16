@@ -72,7 +72,6 @@ class StudentsTable extends React.Component {
                             <th>Add Collection</th>
                             <th>View Collections</th>
                             <th>Send Email</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>

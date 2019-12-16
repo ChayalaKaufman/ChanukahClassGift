@@ -24,10 +24,16 @@
   <ItemGroup>
     <None Remove="ClientApp\src\AddContribtion.js" />
     <None Remove="ClientApp\src\AddContribtion.js" />
+    <None Remove="ClientApp\src\StudentForm.js" />
+    <None Remove="ClientApp\src\StudentForm.js" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClassGift.Data\ClassGift.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\components\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

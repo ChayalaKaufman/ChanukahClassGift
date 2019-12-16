@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import AddStudent from './AddStudent';
 import StudentsTable from './StudentsTable'
-import AddCollection from './AddCollection'
-import ViewCollections from './ViewCollections';
+import RecordCallsOrEmails from './RecordCallsOrEmails'
+import ViewCallsOrEmails from './ViewCallsOrEmails';
 import HomePage from './HomePage';
 
 class App extends React.Component {
@@ -14,8 +14,8 @@ class App extends React.Component {
                 <Route exact path='/' component={HomePage} />
                 <Route exact path='/addstudent' component={AddStudent} />
                 <Route exact path='/studentsTable' component={StudentsTable} />
-                <Route path='/addCollection/:id?' component={AddCollection} />
-                <Route path='/viewCollections/:id?' component={ViewCollections} />
+                <Route path='/RecordCallsOrEmails/:id?' component={RecordCallsOrEmails} />
+                <Route path='/viewCallsOrEmails/:id?' component={ViewCallsOrEmails} />
             </div>
         );
     }

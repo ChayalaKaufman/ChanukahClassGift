@@ -44,15 +44,7 @@ export default class AddStudentForm extends React.Component {
                             name="email"
                             value={student.email}
                             onChange={onInputChange}
-                            placeholder="Email"
-                            className="form-control"
-                        />
-                        <br />
-                        <input type="text"
-                            name="contributionAmount"
-                            value={student.contributionAmount}
-                            onChange={onInputChange}
-                            placeholder="Contribution Amount"
+                            placeholder="Email - Optional"
                             className="form-control"
                         />
                         <br />

@@ -44,45 +44,24 @@ namespace ClassGift.Web.Controllers
         }
 
         [HttpPost]
-        [Route("addCollection")]
-        public void AddCollection(Collection c)
+        [Route("addCallOrEmail")]
+        public void AddCallOrEmail(CallOrEmail c)
         {
             c.Date = DateTime.Now;
             var repo = new StudentsRepository(_connectionString);
-            repo.AddCollection(c);
+            repo.AddCallOrEmail(c);
         }
 
         [HttpGet]
-        [Route("getCollections")]
-        public CollectionsViewModel GetCollections(int id)
+        [Route("getCallsOrEmails")]
+        public CallsOrEmailsViewModel GetCallsOrEmails(int id)
         {
             var repo = new StudentsRepository(_connectionString);
-            CollectionsViewModel cvm = new CollectionsViewModel
+            CallsOrEmailsViewModel cvm = new CallsOrEmailsViewModel
             {
                 Student = repo.GetStudentById(id),
-                Collections = new List<CollectionView>()
+                CallsOrEmails = repo.GetCallsOrEmailsForId(id)
             };
-            List<Collection> collections = repo.GetCollectionsForId(id);
-            collections.ForEach(c =>
-            {
-                CollectionView cView = new CollectionView
-                {
-                    Id = c.Id,
-                    Notes = c.Notes,
-                    Student = c.Student,
-                    StudentId = c.StudentId,
-                    Date = c.Date.ToString("dddd, dd MMMM yyyy")
-                };
-                if (c.Type == 0)
-                {
-                    cView.Type = "Call";
-                }
-                else
-                {
-                    cView.Type = "Email";
-                }
-                cvm.Collections.Add(cView);
-            });
             return cvm;
         }
 
@@ -92,15 +71,6 @@ namespace ClassGift.Web.Controllers
         {
             var repo = new StudentsRepository(_connectionString);
             repo.AddContributionForStudent(cvm.Id, cvm.ContributionAmount);
-            //RedirectToRoute("getall");
-        }
-
-        [Route("delete")]
-        [HttpPost]
-        public void Delete(Student Student)
-        {
-            var repo = new StudentsRepository(_connectionString);
-            repo.Delete(Student.Id);
         }
 
         [Route("getStudent")]
@@ -109,14 +79,6 @@ namespace ClassGift.Web.Controllers
         {
             var repo = new StudentsRepository(_connectionString);
             return repo.GetStudentById(id);
-        }
-
-        [Route("update")]
-        [HttpPost]
-        public void Update(Student p)
-        {
-            var repo = new StudentsRepository(_connectionString);
-            repo.Update(p);
         }
 
         [Route("getTotalContributions")]
@@ -136,14 +98,14 @@ namespace ClassGift.Web.Controllers
             var result = repo.SendEmail(s.Email);
             if (result == "Mail has been successfully sent!")
             {
-                Collection c = new Collection
+                CallOrEmail c = new CallOrEmail
                 {
                     StudentId = id,
-                    Type = CollectionType.Email,
+                    Type = CallOrEmailType.Email,
                     Date = DateTime.Now,
-                    Notes = "sent scripted email"
+                    Notes = "sent automatic email"
                 };
-                repo.AddCollection(c);
+                repo.AddCallOrEmail(c);
             }
             return result;
         }

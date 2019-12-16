@@ -14,14 +14,25 @@ class StudentsTable extends React.Component {
         disabledAll: true
     }
     componentDidMount = () => {
+        this.getDataFromDatabase();
+    }
+
+    getDataFromDatabase = () => {
         axios.get('api/students/getall').then(({ data }) => {
-            data.forEach(s => s.markedForDeletion = false);
             this.setState({ students: data });
             this.setState({ viewStudents: data });
         });
         axios.get('api/students/getTotalContributions').then(({ data }) => {
             this.setState({ totalContributions: data });
         });
+    }
+
+    onContributeClick = () => {
+        this.getDataFromDatabase();
+    }
+
+    onSendEmailClick = () => {
+        this.getDataFromDatabase();
     }
 
     toggleView = (view) => {
@@ -69,14 +80,15 @@ class StudentsTable extends React.Component {
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Contribution Amount</th>
-                            <th>Add Collection</th>
-                            <th>View Collections</th>
-                            <th>Send Email</th>
+                            <th>Send Automatic Email</th>
+                            <th>Record Call/Email</th>
+                            <th>View Calls/Emails</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.viewStudents.map((student, index) =>
-                            <StudentRow student={student} key={index} index={index} onContributeClick={this.onContributeClick} />)}
+                            <StudentRow student={student} key={index} index={index}
+                                onContributeClick={this.onContributeClick} onSendEmailClick={this.onSendEmailClick}/>)}
                     </tbody>
                 </table>
             </div >

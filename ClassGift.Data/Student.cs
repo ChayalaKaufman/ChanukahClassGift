@@ -18,6 +18,6 @@ namespace ClassGift.Data
         public string Phone { get; set; }
         public string Email { get; set; }
         public decimal? ContributionAmount { get; set; }
-        public List<Collection> Collections { get; set; }
+        public List<CallOrEmail> CallsOrEmails { get; set; }
     }
 }

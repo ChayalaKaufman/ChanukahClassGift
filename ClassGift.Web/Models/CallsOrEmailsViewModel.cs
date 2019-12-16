@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassGift.Web.Models
 {
-    public class CollectionsViewModel
+    public class CallsOrEmailsViewModel
     {
-        public List<CollectionView> Collections { get; set; }
+        public List<CallOrEmail> CallsOrEmails { get; set; }
         public Student Student { get; set; }
     }
 }

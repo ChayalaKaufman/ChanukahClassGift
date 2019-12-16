@@ -15,7 +15,7 @@ namespace ClassGift.Data
         }
 
         public DbSet<Student> Students { get; set; }
-        public DbSet<Collection> Collections { get; set; }
+        public DbSet<CallOrEmail> CallsOrEmails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

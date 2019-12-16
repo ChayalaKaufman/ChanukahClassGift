@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ClassGift.Data
 {
-    public class Collection
+    public class CallOrEmail
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public CollectionType Type { get; set; }
+        public CallOrEmailType Type { get; set; }
         public string Notes { get; set; }
         public int StudentId { get; set; }
         public Student Student { get; set; }

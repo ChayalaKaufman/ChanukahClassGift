@@ -3,14 +3,14 @@ import axios from 'axios';
 import { produce } from 'immer';
 import { withRouter } from 'react-router-dom';
 
-class AddCollection extends React.Component {
+class RecordCallsOrEmails extends React.Component {
     state = {
         student: {
             id: '',
             firstName: '',
             lastName: ''
         },
-        collection: {
+        callOrEmail: {
             type: '',
             notes: '',
             studentId: ''
@@ -24,7 +24,7 @@ class AddCollection extends React.Component {
             axios.get(`/api/students/getStudent?id=${id}`).then(({ data }) => {
                 const newState = produce(this.state, draft => {
                     draft.student = data;
-                    draft.collection.studentId = id;
+                    draft.callOrEmail.studentId = id;
                 });
                 this.setState(newState);
             });
@@ -36,9 +36,9 @@ class AddCollection extends React.Component {
 
     onInputChange = e => {
         const newState = produce(this.state, draft => {
-            const { collection } = draft;
-            collection[e.target.name] = e.target.value;
-            if (collection.type) {
+            const { callOrEmail } = draft;
+            callOrEmail[e.target.name] = e.target.value;
+            if (callOrEmail.type) {
                 draft.disabled = false;
             }
             else {
@@ -48,16 +48,16 @@ class AddCollection extends React.Component {
         this.setState(newState);
     }
 
-    onAddClick = () => {
-        axios.post('/api/students/addCollection', this.state.collection).then(() => {
-            //debugger
+    onAddClick = (e) => {
+        e.preventDefault();
+        axios.post('/api/students/addCallOrEmail', this.state.callOrEmail).then(() => {
             const nextState = produce(this.state, draftState => {
                 draftState.student = {
                     firstName: '',
                     lastName: '',
                     id: ''
                 };
-                draftState.collection = {
+                draftState.callOrEmail = {
                     type: '',
                     notes: '',
                     studentId: ''
@@ -74,10 +74,10 @@ class AddCollection extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4 well">
-                            <h1>Add Collection for {this.state.student.firstName + " " + this.state.student.lastName}</h1>
+                            <h2>Record Call/Email for {this.state.student.firstName + " " + this.state.student.lastName}</h2>
                             <textarea type="text"
                                 name="notes"
-                                value={this.state.collection.notes}
+                                value={this.state.callOrEmail.notes}
                                 onChange={this.onInputChange}
                                 placeholder="Type notes here..."
                                 className="form-control"
@@ -115,4 +115,4 @@ class AddCollection extends React.Component {
         )
     }
 }
-export default withRouter(AddCollection);
+export default withRouter(RecordCallsOrEmails);

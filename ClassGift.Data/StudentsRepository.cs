@@ -46,16 +46,6 @@ namespace ClassGift.Data
 
         }
 
-        public void Delete(int id)
-        {
-            using (var context = new StudentsContext(_connectionString))
-            {
-                context.Database.ExecuteSqlCommand(
-                    "DELETE FROM Students WHERE Id = @id",
-                    new SqlParameter("@id", id));
-            }
-        }
-
         public Student GetStudentById(int id)
         {
             using (var context = new StudentsContext(_connectionString))
@@ -64,33 +54,23 @@ namespace ClassGift.Data
             }
         }
 
-        public List<Collection> GetCollectionsForId(int id)
+        public List<CallOrEmail> GetCallsOrEmailsForId(int id)
         {
             using (var context = new StudentsContext(_connectionString))
             {
-                return context.Collections.Where(c => c.StudentId == id).ToList();
+                return context.CallsOrEmails.Where(c => c.StudentId == id).ToList();
             }
         }
-
-        public void Update(Student p)
+        
+        public void AddCallOrEmail(CallOrEmail c)
         {
             using (var context = new StudentsContext(_connectionString))
             {
-                context.Students.Attach(p);
-                context.Entry(p).State = EntityState.Modified;
-                context.SaveChanges();
-            }
-
-        }
-
-        public void AddCollection(Collection c)
-        {
-            using (var context = new StudentsContext(_connectionString))
-            {
-                context.Collections.Add(c);
+                context.CallsOrEmails.Add(c);
                 context.SaveChanges();
             }
         }
+
         public decimal? GetTotalContributions()
         {
             using (var context = new StudentsContext(_connectionString))
@@ -107,7 +87,7 @@ namespace ClassGift.Data
             msg.To.Add(email);
             msg.Subject = "Class Chanukah Gift";
             msg.Body = "We are trying to collect money for a Chanukah gift for the teacher. Please " +
-                "call me at 732-674-0491 or send money with your child to school. Thanks!";
+                "call me at 732-674-0491 or email back with your contribution amount so that I can add it to my app. Thanks!";
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = true;
             client.Host = "smtp.gmail.com";

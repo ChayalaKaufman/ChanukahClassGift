@@ -2,24 +2,23 @@
 import axios from 'axios';
 import { produce } from 'immer';
 import { withRouter, Link } from 'react-router-dom';
-import CollectionRow from './CollectionRow';
+import CallsOrEmailsRow from './CallsOrEmailsRow';
 
-class ViewCollections extends React.Component {
+class ViewCallsOrEmails extends React.Component {
     state = {
-        collections: [],
+        callsOrEmails: [],
         student: {
             firstName: '',
             lastName: '',
             id: 0
         }
     }
-    
     componentDidMount = () => {
         const id = this.props.match.params.id;
         if (id) {
-            axios.get(`/api/students/getCollections?id=${id}`).then(({ data }) => {
+            axios.get(`/api/students/getCallsOrEmails?id=${id}`).then(({ data }) => {
                     const newState = produce(this.state, draft => {
-                        draft.collections = data.collections;
+                        draft.callsOrEmails = data.callsOrEmails;
                         draft.student = data.student;
                     });
                     this.setState(newState);
@@ -32,17 +31,17 @@ class ViewCollections extends React.Component {
     }
 
     render() {
-        const { student, collections } = this.state;
+        const { student, callsOrEmails } = this.state;
         let content;
-        if (!collections.length) {
+        if (!callsOrEmails.length) {
             content = <div className="well">
-                <h1>There are no collections to display for {student.firstName + ' ' + student.lastName}</h1>
+                <h1>There were no calls or emails for {student.firstName + ' ' + student.lastName}</h1>
             </div>
         }
         else {
             content = 
                 <div className="container">
-                <h1>Collections for {student.firstName + ' '+ student.lastName}</h1>
+                <h1>Calls/Emails for {student.firstName + ' '+ student.lastName}</h1>
                     <table className="table table-hover table-striped table-bordered">
                         <thead>
                             <tr>
@@ -52,8 +51,8 @@ class ViewCollections extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {collections.map((collection, index) =>
-                                <CollectionRow collection={collection} key={index} />)}
+                        {callsOrEmails.map((callOrEmail, index) =>
+                            <CallsOrEmailsRow callOrEmail={callOrEmail} key={index} />)}
                         </tbody>
                 </table>
             </div>
@@ -68,4 +67,4 @@ class ViewCollections extends React.Component {
             )
     }
 }
-export default withRouter(ViewCollections);
+export default withRouter(ViewCallsOrEmails);

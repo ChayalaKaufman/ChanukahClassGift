@@ -22,23 +22,23 @@ class StudentRow extends React.Component {
             id: this.props.student.id
         }
         axios.post('/api/students/addContribution', contribution).then(() => {
-            window.location.reload(false);
+            this.props.onContributeClick();
         });
     }
 
-    onCollectClick = () => {
-        this.props.history.push(`/AddCollection/${this.props.student.id}`);
+    onCallOrEmailClick = () => {
+        this.props.history.push(`/RecordCallsOrEmails/${this.props.student.id}`);
     }
 
-    onViewCollectionsClick = () => {
-        this.props.history.push(`/ViewCollections/${this.props.student.id}`);
+    onViewCallsOrEmailsClick = () => {
+        this.props.history.push(`/ViewCallsOrEmails/${this.props.student.id}`);
     }
 
     onSendEmailClick = () => {
         const id = this.props.student.id;
         axios.post(`/api/students/sendEmail?id=${id}`).then(({ data }) => {
             alert(data);
-            window.location.reload(false);
+            this.props.onSendEmailClick();
         });
     }
 
@@ -62,9 +62,9 @@ class StudentRow extends React.Component {
                     </div>
                 }
                 </td>
-                <td>{student.contributionAmount ? ' ' : <button className='btn btn-secondary' onClick={this.onCollectClick}>Add Collection</button>}</td>
-                <td><button className='btn btn-link' onClick={this.onViewCollectionsClick}>View Collections</button></td>
-                <td>{student.contributionAmount || !student.email ? ' ' :<button className='btn btn-link' onClick={this.onSendEmailClick}>Send Email</button>}</td>
+                <td>{student.contributionAmount || !student.email ? ' ' : <button className='btn btn-link' onClick={this.onSendEmailClick}>Send Automatic Email</button>}</td>
+                <td>{student.contributionAmount ? ' ' : <button className='btn btn-secondary' onClick={this.onCallOrEmailClick}>Record Call/Email</button>}</td>
+                <td><button className='btn btn-link' onClick={this.onViewCallsOrEmailsClick}>View Calls/Emails</button></td>
             </tr>
         )
     }

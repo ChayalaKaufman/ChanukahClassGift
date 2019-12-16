@@ -40,8 +40,7 @@ class AddStudent extends React.Component {
                     lastName: '',
                     parentName: '',
                     phone: '',
-                    email: '',
-                    contributionAmount: ''
+                    email: ''
                 }
             });
             this.setState(nextState);

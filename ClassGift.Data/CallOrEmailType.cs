@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassGift.Data
 {
-    public enum CollectionType
+    public enum CallOrEmailType
     {
         Call,
         Email

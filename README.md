@@ -1,6 +1,9 @@
 Hi!
+
 Welcome to the ChanukahClassGift App.
+
 This app was created to help class mothers organize a Chanukah gift for their children's teachers.
+
 It's purpose is to keep track of who contributed and who didn't yet, and who was called or emailed, and who wasn't.
 Below I will explain how the app works.
 The main page has a table that displays the whole class list, with the parent and contact information.

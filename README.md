@@ -9,8 +9,7 @@ On the table, there are additional columns.
   	-Contribution: displays the contribution amount that the student gave. If the student hasn't yet contributed, it displays a textbox and submit button to add their contribution when they give one.
  The next few columns are only available if the student has not yet contributed.
   	-Send Automatic Email: send a scripted email asking the parent for a contribution.
-  	-Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well
-  e.g. "left a message on their machine". When it is saved to the database, it will record the date as well.
+  	-Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well e.g. "left a message on their machine". When it is saved to the database, it will record the date as well.
   	-View Calls/Emails: shows you all the calls and emails that you've made for that student.
   **Being that having an email address is optional (as it says on the add-student-form), the automatic email link will not show up if
   there is no email for that student.

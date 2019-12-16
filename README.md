@@ -17,14 +17,15 @@ On the table, there are additional columns.
  
   -Send Automatic Email: send a scripted email asking the parent for a contribution.
     
-  -Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well e.g. "left a message on their machine". When it is saved to the database, it will record the date as well.
+  -Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well e.g. "left a message on their machine". When the call/email is saved to the database, it will save the current date as well.
     
   -View Calls/Emails: shows you all the calls and emails that you've made for that student.
     
   **Being that having an email address is optional (as it says on the add-student-form), the automatic email link will not show up if
-  there is no email for that student.
+  there is no email address for that student.
   
 Above the table there is a display of the total money collected.
 
 You can also set the view of the table to your preference, using the buttons: view all, view paid, and view unpaid. 
+
 I hope you find everything clear and user-friendly!

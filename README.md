@@ -18,7 +18,7 @@ On the table, there are additional columns:
  
   -Send Automatic Email: send a scripted email asking the parent for a contribution.
     
-  -Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well e.g. "left a message on their machine". When the call/email is saved to the database, it will save the current date as well.
+  -Record Calls/Email: opens a form where you can log the calls/emails you've made for that specific student. You can enter notes as well - e.g. "left a message on their machine". When the call/email is saved to the database, it will save the current date as well.
     
   -View Calls/Emails: shows you all the calls and emails that you've made for that student.
     
